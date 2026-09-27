@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu | Valgus Craft Kitchen Nairobi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Great+Vibes&family=Montserrat:wght@300;400;600;700;800&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+section,header{scroll-margin-top:100px}
+:root{
+  --bg-black:#000;--bg-card:#111;--text-gold:#C29B5C;--text-white:#fff;--text-muted:#a0a0a0;
+  --font-chalk:'Fredericka the Great',cursive;--font-script:'Great Vibes',cursive;
+  --font-body:'Montserrat',sans-serif;--font-ticket:'Special Elite',cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg-black);color:var(--text-white);font-family:var(--font-body);overflow-x:hidden}
+
+/* NAVBAR */
+#navbar{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 3rem;z-index:1000;transition:all .4s ease}
+#navbar.scrolled{background:rgba(0,0,0,.95);backdrop-filter:blur(10px);padding:1rem 3rem;box-shadow:0 4px 20px rgba(0,0,0,.8)}
+.logo-badge{border:2px solid var(--text-gold);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;padding:1rem 1.5rem;text-align:center;color:var(--text-gold);text-transform:uppercase;font-weight:700;letter-spacing:2px;line-height:1.2;font-size:.8rem;transform:rotate(-5deg);box-shadow:0 0 15px rgba(194,155,92,.2);text-decoration:none}
+.logo-badge span{font-size:1.2rem;display:block}
+.nav-links-center{display:flex;list-style:none;gap:3.8rem;align-items:center;position:absolute;left:50%;transform:translateX(-50%)}
+.nav-links-center a{color:var(--text-muted);text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color .3s ease}
+.nav-links-center a:hover,.nav-links-center a.active{color:var(--text-gold)}
+.booking-link{border:1px solid var(--text-gold);padding:.5rem 1.2rem;border-radius:4px;color:var(--text-gold);text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:all .3s ease}
+.booking-link:hover{background:var(--text-gold);color:#000}
+
+/* HERO with background image */
+.menu-hero{position:relative;padding:12rem 3rem 5rem;text-align:center;background-color:var(--bg-black);border-bottom:1px solid rgba(194,155,92,.15);overflow:hidden}
+.menu-hero::before{content:'';position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1920&auto=format&fit=crop');background-size:cover;background-position:center;opacity:.55;z-index:0}
+.menu-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.45) 0%,rgba(0,0,0,.7) 50%,rgba(0,0,0,.92) 100%);z-index:1}
+.menu-hero h1{font-family:var(--font-chalk);font-size:5rem;color:var(--text-gold);text-transform:uppercase;letter-spacing:4px;margin-bottom:1rem;text-shadow:3px 3px 8px rgba(0,0,0,.95);position:relative;z-index:2}
+.menu-hero p{font-size:.9rem;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;font-weight:600;position:relative;z-index:2}
+.menu-hero .gold-divider{width:120px;height:3px;background:var(--text-gold);margin:2rem auto 1.5rem;position:relative;z-index:2}
+
+/* MAIN */
+.menu-main{padding:4rem 5% 8rem;max-width:1300px;margin:0 auto}
+.main-tabs{display:flex;justify-content:center;gap:1rem;margin-bottom:4rem}
+.main-tab{background:transparent;border:1px solid rgba(194,155,92,.35);color:var(--text-muted);padding:1rem 3rem;font-family:var(--font-body);font-weight:700;font-size:.85rem;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:all .35s ease}
+.main-tab:hover{border-color:var(--text-gold);color:var(--text-gold)}
+.main-tab.active{background:var(--text-gold);color:#000;border-color:var(--text-gold);box-shadow:0 6px 25px rgba(194,155,92,.35)}
+.tab-content{display:none}
+.tab-content.active{display:block;animation:fadeSlide .5s ease}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+
+.cuisine-tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:.7rem;margin-bottom:3.5rem}
+.cuisine-tab{background:transparent;border:1px solid rgba(194,155,92,.25);color:var(--text-muted);padding:.55rem 1.4rem;font-family:var(--font-body);font-weight:600;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:20px;transition:all .3s ease}
+.cuisine-tab:hover{color:var(--text-gold);border-color:var(--text-gold)}
+.cuisine-tab.active{background:rgba(194,155,92,.15);color:var(--text-gold);border-color:var(--text-gold)}
+
+/* CARDS */
+.dish-grid,.bev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem}
+.dish-card,.bev-card{background:var(--bg-card);border:1px solid #1e1e1e;border-radius:8px;overflow:hidden;transition:all .4s ease;display:flex;flex-direction:column}
+.dish-card:hover,.bev-card:hover{transform:translateY(-8px);border-color:rgba(194,155,92,.5);box-shadow:0 15px 40px rgba(0,0,0,.8),0 0 25px rgba(194,155,92,.1)}
+.dish-image-wrap,.bev-card-img-wrap{position:relative;width:100%;height:220px;overflow:hidden;background:#0a0a0a}
+.bev-card-img-wrap{height:200px}
+.dish-image-wrap img,.bev-card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .6s ease;filter:brightness(.85);display:block}
+.dish-card:hover .dish-image-wrap img,.bev-card:hover .bev-card-img-wrap img{transform:scale(1.08);filter:brightness(1)}
+.dish-image-wrap::after,.bev-card-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,var(--bg-card) 0%,transparent 100%);pointer-events:none}
+.dish-cuisine-tag{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);border:1px solid rgba(194,155,92,.5);color:var(--text-gold);font-family:var(--font-ticket);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;padding:.35rem .8rem;z-index:2}
+.dish-content,.bev-card-content{padding:1.5rem 1.6rem 1.6rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
+.dish-header-row,.bev-header-row{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.dish-name,.bev-name{font-family:var(--font-body);font-weight:800;font-size:1.05rem;color:var(--text-white);letter-spacing:1px;text-transform:uppercase;line-height:1.3}
+.bev-name{font-size:.95rem}
+.dish-price,.bev-price{font-family:var(--font-body);font-weight:800;font-size:1.05rem;color:var(--text-gold);white-space:nowrap}
+.bev-price{font-size:.95rem}
+.dish-desc,.bev-desc{font-size:.83rem;color:var(--text-muted);line-height:1.6;flex:1}
+.bev-desc{font-size:.78rem}
+
+.dish-footer{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-top:.5rem;padding-top:1rem;border-top:1px dashed rgba(194,155,92,.2)}
+.pair-btn{background:transparent;border:1px solid rgba(194,155,92,.4);color:var(--text-gold);padding:.65rem 1rem;font-family:var(--font-body);font-weight:700;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;border-radius:3px;cursor:pointer;transition:all .3s ease}
+.pair-btn:hover{background:rgba(194,155,92,.15);border-color:var(--text-gold)}
+
+.order-btn{flex:1;background:var(--text-gold);border:1px solid var(--text-gold);color:#000;padding:.75rem 1rem;font-family:var(--font-body);font-weight:800;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;border-radius:3px;cursor:pointer;transition:all .3s ease;box-shadow:0 4px 12px rgba(194,155,92,.3)}
+.order-btn:hover{background:#dfb87a;box-shadow:0 6px 20px rgba(194,155,92,.6);transform:translateY(-2px)}
+.order-btn.added{background:#4caf50;border-color:#4caf50;color:#fff}
+.bev-order-btn{background:var(--text-gold);border:1px solid var(--text-gold);color:#000;padding:.7rem 1rem;font-family:var(--font-body);font-weight:800;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;border-radius:3px;cursor:pointer;transition:all .3s ease;margin-top:.4rem;box-shadow:0 4px 12px rgba(194,155,92,.3)}
+.bev-order-btn:hover{background:#dfb87a;box-shadow:0 6px 20px rgba(194,155,92,.6);transform:translateY(-2px)}
+.bev-order-btn.added{background:#4caf50;border-color:#4caf50;color:#fff}
+
+/* BEVERAGE TABS */
+.bev-tabs{display:flex;justify-content:center;gap:.7rem;margin-bottom:4rem}
+.bev-tab{background:transparent;border:1px solid rgba(194,155,92,.25);color:var(--text-muted);padding:.7rem 2rem;font-family:var(--font-body);font-weight:700;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:all .3s ease}
+.bev-tab:hover{color:var(--text-gold);border-color:var(--text-gold)}
+.bev-tab.active{background:rgba(194,155,92,.15);color:var(--text-gold);border-color:var(--text-gold)}
+.bev-content{display:none}
+.bev-content.active{display:block;animation:fadeSlide .5s ease}
+
+/* TAP LIST */
+.tap-section{margin-bottom:5rem}
+.tap-header{display:flex;align-items:center;gap:1rem;margin-bottom:.7rem}
+.tap-live-dot{width:10px;height:10px;background:#4caf50;border-radius:50%;box-shadow:0 0 12px #4caf50;animation:pulse 1.8s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.tap-header h3{font-family:var(--font-body);font-weight:800;font-size:1.6rem;color:var(--text-gold);text-transform:uppercase;letter-spacing:3px}
+.tap-subtitle{font-family:var(--font-ticket);font-size:.8rem;color:var(--text-muted);letter-spacing:2px;margin-bottom:2.5rem;text-transform:uppercase}
+.tap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.tap-card{background:linear-gradient(160deg,#141414 0%,#0a0a0a 100%);border:1px solid rgba(194,155,92,.25);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;position:relative;transition:all .35s ease}
+.tap-card:hover{border-color:var(--text-gold);transform:translateY(-5px);box-shadow:0 12px 30px rgba(0,0,0,.7)}
+.tap-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(to bottom,var(--text-gold),transparent);z-index:3}
+.tap-card-img{width:100%;height:130px;object-fit:cover;filter:brightness(.8)}
+.tap-card-body{padding:1.3rem 1.5rem 1.5rem;display:flex;flex-direction:column;gap:.7rem}
+.tap-name{font-family:var(--font-body);font-weight:800;font-size:1rem;color:var(--text-white);text-transform:uppercase;letter-spacing:1px}
+.tap-brewery{font-family:var(--font-ticket);font-size:.7rem;color:var(--text-gold);letter-spacing:2px;text-transform:uppercase}
+.tap-meta{display:flex;gap:1.2rem;font-family:var(--font-ticket);font-size:.7rem;color:var(--text-muted);letter-spacing:1px}
+.tap-notes{font-size:.8rem;color:var(--text-muted);line-height:1.5;font-style:italic;border-top:1px dashed rgba(194,155,92,.2);padding-top:.8rem}
+.tap-status{font-family:var(--font-ticket);font-size:.6rem;letter-spacing:2px;padding:.25rem .6rem;border-radius:3px;text-transform:uppercase;width:fit-content}
+.tap-status.pouring{background:rgba(76,175,80,.15);color:#4caf50;border:1px solid #4caf50}
+.tap-status.low{background:rgba(255,152,0,.15);color:#ff9800;border:1px solid #ff9800}
+
+/* BEV SECTIONS */
+.bev-list-section{margin-bottom:5rem}
+.bev-section-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem}
+.bev-section-header h3{font-family:var(--font-body);font-weight:800;font-size:1.6rem;color:var(--text-gold);text-transform:uppercase;letter-spacing:3px}
+.bev-section-header .section-sub{font-family:var(--font-ticket);font-size:.72rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase}
+
+/* PAIRING PANEL */
+.pairing-panel{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(to top,#0a0a0a 0%,#141414 100%);border-top:2px solid var(--text-gold);box-shadow:0 -15px 50px rgba(0,0,0,.95);padding:2rem 5%;z-index:2000;transform:translateY(100%);transition:transform .5s cubic-bezier(.65,0,.35,1)}
+.pairing-panel.open{transform:translateY(0)}
+.pairing-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
+.pairing-dish{flex:1;min-width:260px}
+.pairing-label{font-family:var(--font-ticket);font-size:.65rem;letter-spacing:3px;color:var(--text-muted);text-transform:uppercase;margin-bottom:.4rem}
+.pairing-dish-name{font-family:var(--font-body);font-weight:800;font-size:1.3rem;color:var(--text-white);text-transform:uppercase;letter-spacing:2px}
+.pairing-arrow{font-size:2rem;color:var(--text-gold);flex-shrink:0}
+.pairing-suggestion{flex:1;min-width:260px;background:rgba(194,155,92,.08);border:1px solid rgba(194,155,92,.35);border-radius:6px;padding:1rem 1.4rem}
+.pairing-suggestion .pairing-label{color:var(--text-gold)}
+.pairing-bev-name{font-family:var(--font-body);font-weight:800;font-size:1.15rem;color:var(--text-gold);letter-spacing:1px;margin-bottom:.3rem}
+.pairing-bev-note{font-size:.8rem;color:var(--text-muted);font-style:italic}
+.pairing-close{background:transparent;border:1px solid rgba(194,155,92,.5);color:var(--text-gold);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all .3s ease;flex-shrink:0}
+.pairing-close:hover{background:var(--text-gold);color:#000;transform:rotate(90deg)}
+
+/* CART */
+.cart-fab{position:fixed;bottom:30px;right:30px;width:68px;height:68px;background:var(--text-gold);color:#000;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(194,155,92,.5),0 0 30px rgba(194,155,92,.25);transition:all .35s ease;z-index:1500}
+.cart-fab:hover{transform:scale(1.1);box-shadow:0 10px 40px rgba(194,155,92,.8),0 0 50px rgba(194,155,92,.5)}
+.cart-fab svg{width:28px;height:28px;fill:#000}
+.cart-count{position:absolute;top:-6px;right:-6px;background:#d32f2f;color:#fff;font-family:var(--font-body);font-weight:800;font-size:.72rem;min-width:24px;height:24px;padding:0 6px;border-radius:12px;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg-black);transform:scale(0);transition:transform .3s cubic-bezier(.5,1.8,.6,1)}
+.cart-count.visible{transform:scale(1)}
+.cart-count.bump{animation:cartBump .4s ease}
+@keyframes cartBump{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);z-index:1800;opacity:0;visibility:hidden;transition:all .4s ease}
+.cart-overlay.open{opacity:1;visibility:visible}
+.cart-drawer{position:fixed;top:0;right:0;width:420px;max-width:100vw;height:100vh;background:linear-gradient(180deg,#0d0d0d 0%,#050505 100%);border-left:1px solid rgba(194,155,92,.3);z-index:1900;transform:translateX(100%);transition:transform .5s cubic-bezier(.65,0,.35,1);display:flex;flex-direction:column;box-shadow:-15px 0 50px rgba(0,0,0,.9)}
+.cart-drawer.open{transform:translateX(0)}
+.cart-header{padding:1.8rem 1.6rem 1.4rem;border-bottom:1px solid rgba(194,155,92,.2);display:flex;justify-content:space-between;align-items:center}
+.cart-header h3{font-family:var(--font-body);font-weight:800;font-size:1.15rem;color:var(--text-gold);text-transform:uppercase;letter-spacing:3px}
+.cart-close{background:transparent;border:1px solid rgba(194,155,92,.4);color:var(--text-gold);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .3s ease}
+.cart-close:hover{background:var(--text-gold);color:#000}
+.cart-items{flex:1;overflow-y:auto;padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem}
+.cart-items::-webkit-scrollbar{width:4px}
+.cart-items::-webkit-scrollbar-thumb{background:rgba(194,155,92,.3);border-radius:4px}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;gap:1rem;opacity:.6}
+.cart-empty svg{width:60px;height:60px;fill:var(--text-muted)}
+.cart-empty p{color:var(--text-muted);font-size:.9rem;letter-spacing:1px;line-height:1.6}
+.cart-item{display:flex;gap:1rem;background:#131313;border:1px solid #1e1e1e;border-radius:6px;padding:.9rem;transition:all .3s ease}
+.cart-item:hover{border-color:rgba(194,155,92,.4)}
+.cart-item-img{width:65px;height:65px;border-radius:4px;object-fit:cover;flex-shrink:0;background:#0a0a0a}
+.cart-item-info{flex:1;display:flex;flex-direction:column;gap:.35rem;min-width:0}
+.cart-item-name{font-family:var(--font-body);font-weight:700;font-size:.85rem;color:var(--text-white);text-transform:uppercase;letter-spacing:.5px;line-height:1.2}
+.cart-item-price{font-family:var(--font-body);font-weight:800;font-size:.85rem;color:var(--text-gold)}
+.cart-qty-row{display:flex;align-items:center;gap:.6rem;margin-top:.3rem;flex-wrap:wrap}
+.qty-btn{background:transparent;border:1px solid rgba(194,155,92,.4);color:var(--text-gold);width:26px;height:26px;border-radius:3px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:all .25s ease;font-family:var(--font-body);font-weight:800}
+.qty-btn:hover{background:var(--text-gold);color:#000}
+.cart-qty-value{font-family:var(--font-body);font-weight:800;font-size:.9rem;color:var(--text-white);min-width:24px;text-align:center}
+.cart-item-remove{background:transparent;border:none;color:#d32f2f;cursor:pointer;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;font-family:var(--font-ticket);margin-left:auto;transition:color .25s ease}
+.cart-item-remove:hover{color:#ff5252;text-decoration:underline}
+.cart-footer{padding:1.5rem 1.6rem 1.8rem;border-top:1px solid rgba(194,155,92,.2)}
+.cart-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.2rem}
+.cart-total-label{font-family:var(--font-ticket);font-size:.8rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase}
+.cart-total-value{font-family:var(--font-body);font-weight:800;font-size:1.6rem;color:var(--text-gold);letter-spacing:1px}
+.checkout-btn{width:100%;background:var(--text-gold);border:none;color:#000;padding:1rem;font-family:var(--font-body);font-weight:800;font-size:.85rem;letter-spacing:3px;text-transform:uppercase;border-radius:4px;cursor:pointer;transition:all .3s ease}
+.checkout-btn:hover{background:#dfb87a;transform:translateY(-2px);box-shadow:0 8px 25px rgba(194,155,92,.5)}
+.checkout-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* CHECKOUT MODAL */
+.checkout-modal{position:fixed;inset:0;z-index:2100;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:all .4s ease}
+.checkout-modal.open{opacity:1;visibility:visible}
+.checkout-box{background:linear-gradient(160deg,#141414 0%,#0a0a0a 100%);border:1px solid rgba(194,155,92,.4);border-radius:10px;width:100%;max-width:500px;padding:2.5rem 2.2rem 2rem;box-shadow:0 20px 60px rgba(0,0,0,.95),0 0 40px rgba(194,155,92,.15);transform:scale(.92);transition:transform .4s cubic-bezier(.5,1.5,.6,1);max-height:92vh;overflow-y:auto}
+.checkout-modal.open .checkout-box{transform:scale(1)}
+.checkout-box h3{font-family:var(--font-body);font-weight:800;font-size:1.4rem;color:var(--text-gold);text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:.5rem}
+.checkout-box .checkout-sub{font-family:var(--font-ticket);font-size:.75rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:2rem}
+.checkout-order-summary{background:rgba(194,155,92,.06);border:1px dashed rgba(194,155,92,.35);border-radius:6px;padding:1rem 1.2rem;margin-bottom:1.8rem;font-size:.85rem;color:var(--text-muted);max-height:150px;overflow-y:auto;line-height:1.8}
+.checkout-order-summary strong{color:var(--text-white);font-family:var(--font-ticket);letter-spacing:1px}
+.checkout-field{margin-bottom:1.2rem}
+.checkout-field label{display:block;font-family:var(--font-ticket);font-size:.7rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:.4rem}
+.checkout-field input,.checkout-field select,.checkout-field textarea{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(194,155,92,.35);color:var(--text-white);font-family:var(--font-body);font-size:.95rem;padding:.6rem 0;outline:none;transition:border-color .3s ease}
+.checkout-field input:focus,.checkout-field select:focus,.checkout-field textarea:focus{border-bottom-color:var(--text-gold)}
+.checkout-field select option{background:#111;color:#fff}
+.checkout-field textarea{resize:vertical;min-height:60px}
+.checkout-actions{display:flex;gap:1rem;margin-top:2rem}
+.checkout-actions button{flex:1;padding:.9rem;font-family:var(--font-body);font-weight:800;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;border-radius:4px;cursor:pointer;transition:all .3s ease}
+.checkout-cancel{background:transparent;border:1px solid rgba(194,155,92,.4);color:var(--text-muted)}
+.checkout-cancel:hover{color:var(--text-gold);border-color:var(--text-gold)}
+.checkout-confirm{background:var(--text-gold);border:1px solid var(--text-gold);color:#000}
+.checkout-confirm:hover{background:#dfb87a;box-shadow:0 8px 25px rgba(194,155,92,.5)}
+.order-success{text-align:center;padding:2rem 1rem;display:none}
+.order-success.show{display:block;animation:fadeSlide .5s ease}
+.order-success svg{width:70px;height:70px;fill:#4caf50;margin-bottom:1.5rem;filter:drop-shadow(0 0 20px rgba(76,175,80,.5))}
+.order-success h4{font-family:var(--font-body);font-weight:800;font-size:1.3rem;color:var(--text-gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:.8rem}
+.order-success p{color:var(--text-muted);font-size:.9rem;line-height:1.6}
+
+/* FOOTER */
+footer{background:#050505;padding:2rem 5%;border-top:1px solid #222}
+.footer-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;flex-wrap:wrap;gap:1.5rem}
+.footer-logo{border:1px solid var(--text-gold);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;padding:.6rem 1rem;text-align:center;color:var(--text-gold);text-transform:uppercase;font-weight:700;letter-spacing:1px;line-height:1.1;font-size:.6rem;transform:rotate(-3deg);box-shadow:0 0 15px rgba(194,155,92,.15);text-decoration:none}
+.footer-logo span{font-size:.8rem;display:block}
+.footer-center{display:flex;align-items:center;gap:1.5rem;color:var(--text-muted);font-size:.8rem;letter-spacing:1px}
+.footer-center .divider{color:var(--text-gold)}
+.footer-center span{display:flex;align-items:center;gap:.5rem}
+.footer-center svg{width:14px;height:14px;fill:var(--text-gold)}
+.footer-socials{display:flex;gap:1.2rem}
+.footer-socials a{color:var(--text-muted);transition:color .3s ease;display:flex;align-items:center}
+.footer-socials a:hover{color:var(--text-gold)}
+.footer-socials svg{width:18px;height:18px;fill:currentColor}
+
+/* RESPONSIVE */
+@media(max-width:1200px){
+  .menu-hero h1{font-size:4rem}
+  .nav-links-center{gap:2.5rem}
+  .footer-center{gap:1rem;font-size:.75rem}
+}
+@media(max-width:992px){
+  #navbar{padding:1rem 1.5rem;flex-wrap:wrap;justify-content:center;gap:1rem}
+  #navbar.scrolled{padding:.8rem 1.5rem}
+  .logo-badge{padding:.6rem 1rem;font-size:.65rem;transform:rotate(0)}
+  .logo-badge span{font-size:.9rem}
+  .nav-links-center{position:static;transform:none;order:3;width:100%;justify-content:center;gap:1.5rem;padding-top:.5rem;border-top:1px solid rgba(194,155,92,.15)}
+  .nav-links-center a{font-size:.7rem;letter-spacing:1px}
+  .booking-link{padding:.4rem 1rem;font-size:.7rem}
+  .menu-hero{padding:10rem 1.5rem 3.5rem}
+  .menu-hero h1{font-size:3rem}
+  .menu-main{padding:3rem 1.5rem 5rem}
+  .main-tabs{gap:.5rem;margin-bottom:2.5rem}
+  .main-tab{padding:.8rem 1.8rem;font-size:.75rem;letter-spacing:2px}
+  .cuisine-tabs{gap:.5rem;margin-bottom:2.5rem}
+  .cuisine-tab{padding:.45rem 1rem;font-size:.65rem}
+  .footer-container{flex-direction:column;text-align:center;gap:1.5rem}
+  .footer-center{flex-direction:column;gap:.6rem}
+  .footer-center .divider{display:none}
+  .footer-logo{transform:rotate(0)}
+  .pairing-inner{flex-direction:column;align-items:stretch;gap:1.2rem}
+  .pairing-arrow{display:none}
+  .pairing-close{position:absolute;top:1rem;right:1rem}
+  .pairing-panel{padding:3.5rem 1.5rem 1.5rem}
+}
+@media(max-width:768px){
+  .nav-links-center{gap:1rem;padding-top:.4rem;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none;-ms-overflow-style:none}
+  .nav-links-center::-webkit-scrollbar{display:none}
+  .nav-links-center li{flex-shrink:0}
+  .nav-links-center a{font-size:.65rem;letter-spacing:1px}
+  .booking-link{padding:.35rem .8rem;font-size:.6rem;letter-spacing:1px}
+  .menu-hero h1{font-size:2.2rem;letter-spacing:2px}
+  .menu-hero p{font-size:.75rem;letter-spacing:2px}
+  .main-tabs{flex-wrap:wrap}
+  .main-tab{padding:.7rem 1.4rem;font-size:.7rem}
+  .dish-grid,.bev-grid{grid-template-columns:1fr}
+  .dish-image-wrap{height:200px}
+  .tap-header h3{font-size:1.3rem;letter-spacing:2px}
+  .tap-grid{grid-template-columns:1fr}
+  .bev-section-header h3{font-size:1.3rem}
+  .bev-section-header{flex-direction:column;gap:.3rem}
+  footer{padding:2rem 1rem}
+  .footer-logo{padding:.5rem .9rem;font-size:.55rem}
+  .footer-logo span{font-size:.7rem}
+  .footer-center{font-size:.7rem}
+  .footer-socials{gap:1rem}
+  .footer-socials svg{width:16px;height:16px}
+  .cart-drawer{width:100vw}
+  .cart-fab{bottom:20px;right:20px;width:60px;height:60px}
+  .cart-fab svg{width:24px;height:24px}
+  .checkout-box{padding:2rem 1.5rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<<!-- Navbar -->
+<nav id="navbar">
+    <a href="index.html" class="logo-badge">
+        VALGUS <span>CRAFT KITCHEN</span>
+    </a>
+    
+    <ul class="nav-links-center" id="navLinks">
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="menu.html" class="active">Menu</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-right-group">
+        <a href="booking.html" class="booking-link">Booking</a>
+        <button class="mobile-menu-btn" id="menuBtn" aria-label="Toggle Navigation">&#9776;</button>
+    </div>
+</nav>
+
+<!-- HERO with background image -->
+<section class="menu-hero">
+  <h1>Our Menu</h1>
+  <div class="gold-divider"></div>
+  <p>Crafted with passion • Served with pride</p>
+</section>
+
+<!-- MAIN -->
+<main class="menu-main">
+  <div class="main-tabs">
+    <button class="main-tab active" data-tab="food">Food</button>
+    <button class="main-tab" data-tab="beverages">Beverages</button>
+  </div>
+
+  <!-- FOOD TAB -->
+  <div class="tab-content active" id="foodTab">
+    <div class="cuisine-tabs">
+      <button class="cuisine-tab active" data-cuisine="all">All</button>
+      <button class="cuisine-tab" data-cuisine="burgers">Burgers</button>
+      <button class="cuisine-tab" data-cuisine="pizza">Pizza</button>
+      <button class="cuisine-tab" data-cuisine="pasta">Pasta</button>
+      <button class="cuisine-tab" data-cuisine="grills">Grills</button>
+      <button class="cuisine-tab" data-cuisine="kenyan">Kenyan</button>
+      <button class="cuisine-tab" data-cuisine="sides">Sides</button>
+    </div>
+    <div class="dish-grid" id="dishGrid"></div>
+  </div>
+
+  <!-- BEVERAGES TAB -->
+  <div class="tab-content" id="beveragesTab">
+    <div class="bev-tabs">
+      <button class="bev-tab active" data-bev="alcoholic">Alcoholic</button>
+      <button class="bev-tab" data-bev="non-alcoholic">Non-Alcoholic</button>
+    </div>
+
+    <!-- ALCOHOLIC -->
+    <div class="bev-content active" id="alcoholicContent">
+      <div class="tap-section">
+        <div class="tap-header">
+          <span class="tap-live-dot"></span>
+          <h3>On Tap Today</h3>
+        </div>
+        <p class="tap-subtitle">Live craft beer availability</p>
+        <div class="tap-grid" id="tapGrid"></div>
+      </div>
+
+      <div class="bev-list-section">
+        <div class="bev-section-header">
+          <h3>Wines</h3>
+          <span class="section-sub">By the glass & bottle</span>
+        </div>
+        <div class="bev-grid" id="winesGrid"></div>
+      </div>
+
+      <div class="bev-list-section">
+        <div class="bev-section-header">
+          <h3>Cocktails</h3>
+          <span class="section-sub">Shaken, stirred & made to order</span>
+        </div>
+        <div class="bev-grid" id="cocktailsGrid"></div>
+      </div>
+    </div>
+
+    <!-- NON-ALCOHOLIC -->
+    <div class="bev-content" id="nonAlcoholicContent">
+      <div class="bev-list-section">
+        <div class="bev-section-header">
+          <h3>Soft Drinks & Juices</h3>
+          <span class="section-sub">Fresh & chilled</span>
+        </div>
+        <div class="bev-grid" id="softDrinksGrid"></div>
+      </div>
+
+      <div class="bev-list-section">
+        <div class="bev-section-header">
+          <h3>Hot Beverages</h3>
+          <span class="section-sub">Coffee & tea selection</span>
+        </div>
+        <div class="bev-grid" id="hotBevGrid"></div>
+      </div>
+
+      <div class="bev-list-section">
+        <div class="bev-section-header">
+          <h3>Mocktails</h3>
+          <span class="section-sub">Zero-alcohol refreshers</span>
+        </div>
+        <div class="bev-grid" id="mocktailsGrid"></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- PAIRING PANEL -->
+<div class="pairing-panel" id="pairingPanel">
+  <div class="pairing-inner">
+    <div class="pairing-dish">
+      <div class="pairing-label">You selected</div>
+      <div class="pairing-dish-name" id="pairingDishName">—</div>
+    </div>
+    <div class="pairing-arrow">&#8594;</div>
+    <div class="pairing-suggestion">
+      <div class="pairing-label">Perfect Pairing</div>
+      <div class="pairing-bev-name" id="pairingBevName">—</div>
+      <div class="pairing-bev-note" id="pairingBevNote"></div>
+    </div>
+    <button class="pairing-close" id="pairingClose" aria-label="Close">&#10005;</button>
+  </div>
+</div>
+
+<!-- CART FAB -->
+<button class="cart-fab" id="cartFab" aria-label="Open order">
+  <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<!-- CART DRAWER -->
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>Your Order</h3>
+    <button class="cart-close" id="cartClose" aria-label="Close cart">&#10005;</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Subtotal</span>
+      <span class="cart-total-value" id="cartTotal">KSh 0</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" disabled>Checkout</button>
+  </div>
+</aside>
+
+<!-- CHECKOUT MODAL -->
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-box">
+    <div id="checkoutFormView">
+      <h3>Complete Order</h3>
+      <p class="checkout-sub">Confirm your details below</p>
+      <div class="checkout-order-summary" id="checkoutSummary"></div>
+      <form id="checkoutForm">
+        <div class="checkout-field">
+          <label for="custName">Full Name</label>
+          <input type="text" id="custName" required>
+        </div>
+        <div class="checkout-field">
+          <label for="custPhone">Phone Number</label>
+          <input type="tel" id="custPhone" required>
+        </div>
+        <div class="checkout-field">
+          <label for="orderType">Order Type</label>
+          <select id="orderType" required>
+            <option value="Dine-in">Dine-in</option>
+            <option value="Takeaway">Takeaway</option>
+          </select>
+        </div>
+        <div class="checkout-field">
+          <label for="custNotes">Special Requests (optional)</label>
+          <textarea id="custNotes" placeholder="Allergies, table preference, etc."></textarea>
+        </div>
+        <div class="checkout-actions">
+          <button type="button" class="checkout-cancel" id="checkoutCancel">Cancel</button>
+          <button type="submit" class="checkout-confirm">Place Order</button>
+        </div>
+      </form>
+    </div>
+    <div class="order-success" id="orderSuccess">
+      <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+      <h4>Order Placed!</h4>
+      <p id="orderSuccessMsg"></p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <a href="index.html" class="footer-logo">VALGUS<span>CRAFT KITCHEN</span></a>
+    <div class="footer-center">
+      <span>Copyright 2024© Valgus Craft Kitchen</span>
+      <span class="divider">|</span>
+      <span>
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Westlands, Nairobi
+      </span>
+      <span class="divider">|</span>
+      <span>
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        +254 700 123 456
+      </span>
+    </div>
+    <div class="footer-socials">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+      <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============ DATA ============
+var dishes = [
+  {id:'b1',cuisine:'burgers',cuisineLabel:'Burgers',name:'Valgus Signature Burger',price:1200,
+   desc:'Double beef patty, aged cheddar, smoked bacon, house sauce, brioche bun.',
+   img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Valgus Pale Ale',note:'Citrusy hops cut through the rich beef & cheddar.'}},
+  {id:'b2',cuisine:'burgers',cuisineLabel:'Burgers',name:'Crispy Chicken Burger',price:1050,
+   desc:'Buttermilk-fried chicken, pickled slaw, spicy mayo, sesame bun.',
+   img:'https://images.unsplash.com/photo-1606755962773-d324e0a13086?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Craft Lager',note:'Crisp & clean — balances the spice and fried coating.'}},
+  {id:'b3',cuisine:'burgers',cuisineLabel:'Burgers',name:'Pulled Beef Burger',price:1150,
+   desc:'Slow-braised beef, BBQ glaze, caramelized onions, smoked gouda.',
+   img:'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Smoked Whiskey Sour',note:'Smoky whiskey echoes the BBQ glaze beautifully.'}},
+  {id:'p1',cuisine:'pizza',cuisineLabel:'Pizza',name:'Margherita',price:950,
+   desc:'San Marzano tomato, fresh mozzarella, basil, extra virgin olive oil.',
+   img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Cloudy Bay Sauvignon Blanc',note:'Bright citrus lifts the tomato and creamy mozzarella.'}},
+  {id:'p2',cuisine:'pizza',cuisineLabel:'Pizza',name:'Pepperoni & Chilli Honey',price:1100,
+   desc:'Double pepperoni, mozzarella, chilli-infused honey drizzle.',
+   img:'https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Craft IPA',note:'Bitter hops & sweet honey — a spicy-sweet duet.'}},
+  {id:'p3',cuisine:'pizza',cuisineLabel:'Pizza',name:'Truffle Mushroom',price:1250,
+   desc:'Wild mushrooms, truffle cream, mozzarella, thyme, parmesan.',
+   img:'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Nederburg Cabernet Sauvignon',note:'Earthy wine mirrors the umami of truffle & mushroom.'}},
+  {id:'pa1',cuisine:'pasta',cuisineLabel:'Pasta',name:'Spaghetti & Meatballs',price:1050,
+   desc:'Hand-rolled beef meatballs, slow-cooked tomato sauce, parmesan.',
+   img:'https://images.unsplash.com/photo-1544378730-8b5104b5220e?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Four Cousins Sweet Red',note:'Fruity sweetness complements the tomato-rich sauce.'}},
+  {id:'pa2',cuisine:'pasta',cuisineLabel:'Pasta',name:'Fettuccine Alfredo',price:1000,
+   desc:'Creamy parmesan sauce, garlic butter, fresh parsley, cracked pepper.',
+   img:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Chardonnay',note:'Buttery chardonnay matches the rich cream sauce.'}},
+  {id:'pa3',cuisine:'pasta',cuisineLabel:'Pasta',name:'Penne Arrabbiata',price:950,
+   desc:'Spicy tomato sauce, garlic, chilli flakes, basil, olive oil.',
+   img:'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Craft Lager',note:'Cool, crisp lager soothes the heat of the chilli.'}},
+  {id:'g1',cuisine:'grills',cuisineLabel:'Grills',name:'Ribeye Steak',price:2200,
+   desc:'300g dry-aged ribeye, herb butter, roasted garlic, seasonal greens.',
+   img:'https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Nederburg Cabernet Sauvignon',note:'Bold red — the classic steak & cabernet pairing.'}},
+  {id:'g2',cuisine:'grills',cuisineLabel:'Grills',name:'BBQ Pork Ribs',price:1800,
+   desc:'Half rack, slow-smoked, house BBQ glaze, pickled slaw, fries.',
+   img:'https://images.unsplash.com/photo-1544025162-d76690b67c6f?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Smoked Whiskey Sour',note:'Smoke & whiskey — a match made in the pit.'}},
+  {id:'g3',cuisine:'grills',cuisineLabel:'Grills',name:'Grilled Half Chicken',price:1500,
+   desc:'Marinated in lemon, garlic & herbs, grilled over open flame, fries.',
+   img:'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Cloudy Bay Sauvignon Blanc',note:'Bright acidity complements the lemon & herb marinade.'}},
+  {id:'k1',cuisine:'kenyan',cuisineLabel:'Kenyan',name:'Nyama Choma',price:1400,
+   desc:'Charcoal-grilled goat meat, kachumbari, ugali on the side.',
+   img:'https://images.unsplash.com/photo-1544025162-d76690b67c6f?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Tusker Lager',note:"Kenya's classic pairing — nothing beats a cold Tusker."}},
+  {id:'k2',cuisine:'kenyan',cuisineLabel:'Kenyan',name:'Ugali & Sukuma Wiki',price:750,
+   desc:'Stone-ground maize, sautéed collard greens, grilled onions, tomatoes.',
+   img:'https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Fresh Passion Juice',note:'Sweet & tropical — balances the earthy greens.'}},
+  {id:'k3',cuisine:'kenyan',cuisineLabel:'Kenyan',name:'Pilau ya Nyama',price:900,
+   desc:'Spiced rice cooked with tender beef, served with kachumbari.',
+   img:'https://images.unsplash.com/photo-1596797038530-2c107229654b?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Westlands Mule',note:'Ginger & lime sparkle against the aromatic spices.'}},
+  {id:'s1',cuisine:'sides',cuisineLabel:'Sides',name:'Loaded Fries',price:650,
+   desc:'Crispy fries, melted cheese, bacon bits, spring onions, house sauce.',
+   img:'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Craft Lager',note:'Cold lager + cheesy fries = the perfect bar snack.'}},
+  {id:'s2',cuisine:'sides',cuisineLabel:'Sides',name:'Onion Rings',price:500,
+   desc:'Beer-battered onion rings, spicy aioli dipping sauce.',
+   img:'https://images.unsplash.com/photo-1639024471283-03518883512d?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Craft IPA',note:'Hoppy IPA stands up to the fried batter.'}},
+  {id:'s3',cuisine:'sides',cuisineLabel:'Sides',name:'Chicken Wings',price:850,
+   desc:'Six wings tossed in your choice of BBQ, buffalo or honey-garlic.',
+   img:'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?q=80&w=800&auto=format&fit=crop',
+   pairing:{name:'Valgus Pale Ale',note:'Crisp & citrusy — the ultimate wing companion.'}}
+];
+
+var beverages = {
+  wines:[
+    {id:'w1',name:'Nederburg Cabernet Sauvignon',price:750,desc:'South Africa • Full-bodied • Dark berries & oak',
+     img:'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=600&auto=format&fit=crop'},
+    {id:'w2',name:'Four Cousins Sweet Red',price:650,desc:'South Africa • Smooth & fruity • Slightly sweet',
+     img:'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=600&auto=format&fit=crop'},
+    {id:'w3',name:'Cloudy Bay Sauvignon Blanc',price:950,desc:'New Zealand • Crisp & citrus-forward',
+     img:'https://images.unsplash.com/photo-1566754436893-98224ee05be2?q=80&w=600&auto=format&fit=crop'},
+    {id:'w4',name:'Moët & Chandon Brut',price:2500,desc:'France • Champagne • Fine bubbles & brioche',
+     img:'https://images.unsplash.com/photo-1550985543-49bee3167284?q=80&w=600&auto=format&fit=crop'}
+  ],
+  cocktails:[
+    {id:'c1',name:'Valgus Old Fashioned',price:850,desc:'Bourbon, smoked bitters, orange twist, brown sugar',
+     img:'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=600&auto=format&fit=crop'},
+    {id:'c2',name:'Nairobi Sundowner',price:800,desc:'Gin, passionfruit, hibiscus syrup, lime, tonic',
+     img:'https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=600&auto=format&fit=crop'},
+    {id:'c3',name:'Smoked Whiskey Sour',price:900,desc:'Whiskey, lemon, egg white, smoked rosemary',
+     img:'https://images.unsplash.com/photo-1560512823-829485b8bf24?q=80&w=600&auto=format&fit=crop'},
+    {id:'c4',name:'Westlands Mule',price:750,desc:'Vodka, ginger beer, fresh lime, mint',
+     img:'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?q=80&w=600&auto=format&fit=crop'}
+  ],
+  softDrinks:[
+    {id:'sd1',name:'Fresh Passion Juice',price:300,desc:'Freshly squeezed daily',
+     img:'https://images.unsplash.com/photo-1600271886742-f049cd451bba?q=80&w=600&auto=format&fit=crop'},
+    {id:'sd2',name:'Fresh Mango Juice',price:300,desc:'Sweet Kenyan mangoes',
+     img:'https://images.unsplash.com/photo-1546173159-315724a31696?q=80&w=600&auto=format&fit=crop'},
+    {id:'sd3',name:'Coca-Cola / Fanta / Sprite',price:200,desc:'Served chilled • 300ml',
+     img:'https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=600&auto=format&fit=crop'},
+    {id:'sd4',name:'Sparkling Water',price:250,desc:'500ml bottle',
+     img:'https://images.unsplash.com/photo-1523362628745-0c100150b504?q=80&w=600&auto=format&fit=crop'}
+  ],
+  hotBev:[
+    {id:'h1',name:'Espresso',price:250,desc:'Double shot • Kenyan AA beans',
+     img:'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=80&w=600&auto=format&fit=crop'},
+    {id:'h2',name:'Cappuccino',price:350,desc:'Espresso with steamed milk & foam',
+     img:'https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=600&auto=format&fit=crop'},
+    {id:'h3',name:'Chai Latte',price:350,desc:'Spiced black tea with steamed milk',
+     img:'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?q=80&w=600&auto=format&fit=crop'},
+    {id:'h4',name:'Kenyan Black Tea',price:200,desc:'Served with milk on request',
+     img:'https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=600&auto=format&fit=crop'}
+  ],
+  mocktails:[
+    {id:'m1',name:'Virgin Mojito',price:450,desc:'Fresh mint, lime, brown sugar, soda',
+     img:'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?q=80&w=600&auto=format&fit=crop'},
+    {id:'m2',name:'Tropical Sunset',price:500,desc:'Pineapple, orange, grenadine, lime',
+     img:'https://images.unsplash.com/photo-1546171753-97d7676e4602?q=80&w=600&auto=format&fit=crop'},
+    {id:'m3',name:'Ginger & Mint Cooler',price:450,desc:'Fresh ginger, mint, lime, sparkling water',
+     img:'https://images.unsplash.com/photo-1622597467836-f3e6707e11b8?q=80&w=600&auto=format&fit=crop'}
+  ]
+};
+
+var tapList = [
+  {name:'Valgus Pale Ale',brewery:'Valgus Brewery • Nairobi',abv:'5.2%',ibu:'38',status:'pouring',
+   notes:'Bright citrus, piney hops, clean bitter finish.',
+   img:'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=600&auto=format&fit=crop'},
+  {name:'Tusker Lager',brewery:'Kenya Breweries • Nairobi',abv:'4.2%',ibu:'18',status:'pouring',
+   notes:'Crisp, light-bodied, subtle malt sweetness.',
+   img:'https://images.unsplash.com/photo-1608270586620-248524c67de9?q=80&w=600&auto=format&fit=crop'},
+  {name:'Craft IPA',brewery:'Big Five Breweries • Nairobi',abv:'6.5%',ibu:'62',status:'pouring',
+   notes:'Bold tropical fruit, resiny hops, dry finish.',
+   img:'https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=600&auto=format&fit=crop'},
+  {name:'Stout Noir',brewery:'Valgus Brewery • Nairobi',abv:'7.0%',ibu:'45',status:'low',
+   notes:'Dark chocolate, roasted coffee, silky body.',
+   img:'https://images.unsplash.com/photo-1547595628-c61a29f496f0?q=80&w=600&auto=format&fit=crop'},
+  {name:'Wheat Sunset',brewery:'Bila Shaka Brewery • Nairobi',abv:'5.0%',ibu:'22',status:'pouring',
+   notes:'Banana & clove esters, smooth hazy pour.',
+   img:'https://images.unsplash.com/photo-1436076863939-06870fe779c2?q=80&w=600&auto=format&fit=crop'},
+  {name:'Amber Ale',brewery:'Kibo Brewing Co. • Nairobi',abv:'5.5%',ibu:'35',status:'low',
+   notes:'Toffee malt, mild bitterness, warming finish.',
+   img:'https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?q=80&w=600&auto=format&fit=crop'}
+];
+
+// ============ HELPERS ============
+function fmt(n){return 'KSh ' + n.toLocaleString();}
+
+// ============ RENDER ============
+function renderDishes(filter){
+  if(!filter) filter = 'all';
+  var grid = document.getElementById('dishGrid');
+  grid.innerHTML = '';
+  var list = filter === 'all' ? dishes : dishes.filter(function(d){return d.cuisine === filter;});
+  list.forEach(function(d){
+    var card = document.createElement('div');
+    card.className = 'dish-card';
+    card.innerHTML = 
+      '<div class="dish-image-wrap">' +
+        '<span class="dish-cuisine-tag">' + d.cuisineLabel + '</span>' +
+        '<img src="' + d.img + '" alt="' + d.name + '" loading="lazy">' +
+      '</div>' +
+      '<div class="dish-content">' +
+        '<div class="dish-header-row">' +
+          '<div class="dish-name">' + d.name + '</div>' +
+          '<div class="dish-price">' + fmt(d.price) + '</div>' +
+        '</div>' +
+        '<div class="dish-desc">' + d.desc + '</div>' +
+        '<div class="dish-footer">' +
+          '<button class="pair-btn" data-dish-id="' + d.id + '">Pair</button>' +
+          '<button class="order-btn" data-add-id="' + d.id + '" data-add-name="' + d.name + '" data-add-price="' + d.price + '" data-add-img="' + d.img + '">+ Add to Order</button>' +
+        '</div>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+}
+
+function renderTapList(){
+  var grid = document.getElementById('tapGrid');
+  grid.innerHTML = '';
+  tapList.forEach(function(b){
+    var card = document.createElement('div');
+    card.className = 'tap-card';
+    card.innerHTML =
+      '<img class="tap-card-img" src="' + b.img + '" alt="' + b.name + '" loading="lazy">' +
+      '<div class="tap-card-body">' +
+        '<div class="tap-name">' + b.name + '</div>' +
+        '<div class="tap-brewery">' + b.brewery + '</div>' +
+        '<div class="tap-meta"><span>ABV ' + b.abv + '</span><span>IBU ' + b.ibu + '</span></div>' +
+        '<div class="tap-notes">' + b.notes + '</div>' +
+        '<span class="tap-status ' + b.status + '">' + (b.status === 'pouring' ? '● Pouring' : '● Running Low') + '</span>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+}
+
+function renderBeverages(items, gridId){
+  var grid = document.getElementById(gridId);
+  if(!grid) return;
+  grid.innerHTML = '';
+  items.forEach(function(b){
+    var card = document.createElement('div');
+    card.className = 'bev-card';
+    card.innerHTML =
+      '<div class="bev-card-img-wrap">' +
+        '<img src="' + b.img + '" alt="' + b.name + '" loading="lazy">' +
+      '</div>' +
+      '<div class="bev-card-content">' +
+        '<div class="bev-header-row">' +
+          '<div class="bev-name">' + b.name + '</div>' +
+          '<div class="bev-price">' + fmt(b.price) + '</div>' +
+        '</div>' +
+        '<div class="bev-desc">' + b.desc + '</div>' +
+        '<button class="bev-order-btn" data-add-id="' + b.id + '" data-add-name="' + b.name + '" data-add-price="' + b.price + '" data-add-img="' + b.img + '">+ Add to Order</button>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+}
+
+// ============ CART ============
+var cart = [];
+
+function addToCart(item){
+  var existing = null;
+  for(var i = 0; i < cart.length; i++){
+    if(cart[i].id === item.id){ existing = cart[i]; break; }
+  }
+  if(existing){ existing.qty += 1; }
+  else { cart.push({id:item.id, name:item.name, price:item.price, img:item.img, qty:1}); }
+  renderCart();
+  var cc = document.getElementById('cartCount');
+  cc.classList.remove('bump');
+  void cc.offsetWidth;
+  cc.classList.add('bump');
+}
+
+function changeQty(id, delta){
+  for(var i = 0; i < cart.length; i++){
+    if(cart[i].id === id){
+      cart[i].qty += delta;
+      if(cart[i].qty <= 0){ cart.splice(i,1); }
+      break;
+    }
+  }
+  renderCart();
+}
+
+function removeItem(id){
+  cart = cart.filter(function(c){ return c.id !== id; });
+  renderCart();
+}
+
+function renderCart(){
+  var totalQty = 0, totalPrice = 0;
+  cart.forEach(function(c){ totalQty += c.qty; totalPrice += c.qty * c.price; });
+
+  var cc = document.getElementById('cartCount');
+  cc.textContent = totalQty;
+  if(totalQty > 0){ cc.classList.add('visible'); } else { cc.classList.remove('visible'); }
+
+  document.getElementById('cartTotal').textContent = fmt(totalPrice);
+  document.getElementById('checkoutBtn').disabled = cart.length === 0;
+
+  var el = document.getElementById('cartItems');
+
+  if(cart.length === 0){
+    el.innerHTML = 
+      '<div class="cart-empty">' +
+        '<svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>' +
+        '<p>Your order is empty.<br>Add something tasty from the menu!</p>' +
+      '</div>';
+    return;
+  }
+
+  el.innerHTML = cart.map(function(item){
+    return '<div class="cart-item">' +
+      '<img class="cart-item-img" src="' + item.img + '" alt="' + item.name + '">' +
+      '<div class="cart-item-info">' +
+        '<div class="cart-item-name">' + item.name + '</div>' +
+        '<div class="cart-item-price">' + fmt(item.price * item.qty) + '</div>' +
+        '<div class="cart-qty-row">' +
+          '<button class="qty-btn" data-qty-id="' + item.id + '" data-qty-delta="-1">−</button>' +
+          '<span class="cart-qty-value">' + item.qty + '</span>' +
+          '<button class="qty-btn" data-qty-id="' + item.id + '" data-qty-delta="1">+</button>' +
+          '<button class="cart-item-remove" data-remove-id="' + item.id + '">Remove</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+// ============ EVENTS ============
+var navbar = document.getElementById('navbar');
+window.addEventListener('scroll', function(){
+  if(window.scrollY > 50){ navbar.classList.add('scrolled'); }
+  else { navbar.classList.remove('scrolled'); }
+});
+
+document.querySelectorAll('.main-tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.main-tab').forEach(function(t){ t.classList.remove('active'); });
+    tab.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(function(c){ c.classList.remove('active'); });
+    document.getElementById(tab.dataset.tab + 'Tab').classList.add('active');
+  });
+});
+
+document.querySelectorAll('.cuisine-tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.cuisine-tab').forEach(function(t){ t.classList.remove('active'); });
+    tab.classList.add('active');
+    renderDishes(tab.dataset.cuisine);
+  });
+});
+
+document.querySelectorAll('.bev-tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.bev-tab').forEach(function(t){ t.classList.remove('active'); });
+    tab.classList.add('active');
+    document.querySelectorAll('.bev-content').forEach(function(c){ c.classList.remove('active'); });
+    if(tab.dataset.bev === 'non-alcoholic'){
+      document.getElementById('nonAlcoholicContent').classList.add('active');
+    } else {
+      document.getElementById('alcoholicContent').classList.add('active');
+    }
+  });
+});
+
+document.addEventListener('click', function(e){
+  var t = e.target;
+
+  if(t.classList.contains('pair-btn')){
+    var dishId = t.dataset.dishId;
+    var dish = dishes.find(function(d){ return d.id === dishId; });
+    if(!dish) return;
+    document.getElementById('pairingDishName').textContent = dish.name;
+    document.getElementById('pairingBevName').textContent = dish.pairing.name;
+    document.getElementById('pairingBevNote').textContent = dish.pairing.note;
+    document.getElementById('pairingPanel').classList.add('open');
+  }
+
+  if(t.hasAttribute('data-add-id')){
+    addToCart({
+      id: t.dataset.addId,
+      name: t.dataset.addName,
+      price: parseInt(t.dataset.addPrice, 10),
+      img: t.dataset.addImg
+    });
+    var orig = t.textContent;
+    t.textContent = '✓ Added';
+    t.classList.add('added');
+    setTimeout(function(){ t.textContent = orig; t.classList.remove('added'); }, 1200);
+  }
+
+  if(t.hasAttribute('data-qty-id')){
+    changeQty(t.dataset.qtyId, parseInt(t.dataset.qtyDelta, 10));
+  }
+
+  if(t.hasAttribute('data-remove-id')){
+    removeItem(t.dataset.removeId);
+  }
+});
+
+document.getElementById('pairingClose').addEventListener('click', function(){
+  document.getElementById('pairingPanel').classList.remove('open');
+});
+document.addEventListener('click', function(e){
+  var p = document.getElementById('pairingPanel');
+  if(!p.contains(e.target) && !e.target.classList.contains('pair-btn') && p.classList.contains('open')){
+    p.classList.remove('open');
+  }
+});
+
+var cartDrawer = document.getElementById('cartDrawer');
+var cartOverlay = document.getElementById('cartOverlay');
+
+function openCart(){
+  cartDrawer.classList.add('open');
+  cartOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart(){
+  cartDrawer.classList.remove('open');
+  cartOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('cartFab').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+cartOverlay.addEventListener('click', closeCart);
+
+var checkoutModal = document.getElementById('checkoutModal');
+var checkoutForm = document.getElementById('checkoutForm');
+var checkoutFormView = document.getElementById('checkoutFormView');
+var orderSuccess = document.getElementById('orderSuccess');
+
+document.getElementById('checkoutBtn').addEventListener('click', function(){
+  if(cart.length === 0) return;
+  var total = 0;
+  cart.forEach(function(c){ total += c.qty * c.price; });
+  document.getElementById('checkoutSummary').innerHTML =
+    cart.map(function(c){
+      return '<div><strong>' + c.qty + '×</strong> ' + c.name + ' — ' + fmt(c.price * c.qty) + '</div>';
+    }).join('') +
+    '<div style="margin-top:0.6rem;padding-top:0.6rem;border-top:1px dashed rgba(194,155,92,0.3);color:#C29B5C;font-weight:700">Total: ' + fmt(total) + '</div>';
+  checkoutFormView.style.display = 'block';
+  orderSuccess.classList.remove('show');
+  checkoutModal.classList.add('open');
+});
+
+document.getElementById('checkoutCancel').addEventListener('click', function(){
+  checkoutModal.classList.remove('open');
+});
+checkoutModal.addEventListener('click', function(e){
+  if(e.target === checkoutModal) checkoutModal.classList.remove('open');
+});
+
+checkoutForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  var name = document.getElementById('custName').value;
+  var type = document.getElementById('orderType').value;
+  document.getElementById('orderSuccessMsg').textContent =
+    'Asante, ' + name + '! Your ' + type.toLowerCase() + ' order has been received. We\'ll have it ready shortly.';
+  checkoutFormView.style.display = 'none';
+  orderSuccess.classList.add('show');
+  setTimeout(function(){
+    cart = [];
+    renderCart();
+    closeCart();
+    checkoutModal.classList.remove('open');
+    checkoutForm.reset();
+    checkoutFormView.style.display = 'block';
+    orderSuccess.classList.remove('show');
+  }, 3200);
+});
+
+// ============ INIT ============
+renderDishes('all');
+renderTapList();
+renderBeverages(beverages.wines, 'winesGrid');
+renderBeverages(beverages.cocktails, 'cocktailsGrid');
+renderBeverages(beverages.softDrinks, 'softDrinksGrid');
+renderBeverages(beverages.hotBev, 'hotBevGrid');
+renderBeverages(beverages.mocktails, 'mocktailsGrid');
+renderCart();
+</script>
+
+</body>
+</html>

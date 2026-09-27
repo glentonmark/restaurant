@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Valgus Craft Kitchen Nairobi</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        :root {
+            --bg-black: #000000;
+            --bg-card: #121212;
+            --text-gold: #C29B5C;
+            --text-white: #ffffff;
+            --text-muted: #a0a0a0;
+            --font-body: 'Montserrat', sans-serif;
+            --font-chalk: 'Fredericka the Great', cursive;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* Navbar - Transparent on Hero, Solid on Scroll */
+        #navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 4rem; z-index: 1000; transition: background 0.4s ease, padding 0.4s ease;
+            background: transparent;
+        }
+        #navbar.scrolled {
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 1rem 4rem;
+        }
+
+        /* Tilted Oval Badge Logo */
+        .brand-logo-badge {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid var(--text-gold);
+            border-radius: 50%;
+            padding: 0.4rem 1.1rem;
+            text-decoration: none;
+            color: var(--text-gold);
+            transform: rotate(-10deg);
+            transition: transform 0.3s ease;
+            text-align: center;
+            line-height: 1.05;
+        }
+        .brand-logo-badge:hover {
+            transform: rotate(-10deg) scale(1.05);
+        }
+        .brand-logo-badge .valgus-text {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+        }
+        .brand-logo-badge .craft-text {
+            font-size: 0.95rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* Spaced-Out Nav Links */
+        .nav-links-center {
+            display: flex; list-style: none; gap: 5.5rem; align-items: center;
+            position: absolute; left: 50%; transform: translateX(-50%);
+        }
+        .nav-links-center a {
+            color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+            font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .nav-links-center a:hover, .nav-links-center a.active { color: var(--text-gold); }
+        
+        .nav-right-group {
+            display: flex; align-items: center; gap: 1.5rem;
+        }
+        .booking-link {
+            border: 1px solid var(--text-gold); padding: 0.5rem 1.2rem;
+            border-radius: 4px; color: var(--text-gold); text-decoration: none;
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; transition: all 0.3s ease;
+        }
+        .booking-link:hover { background-color: var(--text-gold); color: #000; }
+
+        /* Mobile Hamburger Menu */
+        .mobile-menu-btn {
+            display: none; background: none; border: none;
+            color: var(--text-gold); font-size: 1.8rem; cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative; width: 100%; height: 85vh; min-height: 550px;
+            display: flex; align-items: flex-end; background-color: var(--bg-black);
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+        }
+        .hero-bg img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: brightness(0.45) contrast(1.1); display: block;
+        }
+        .hero-bg::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.85) 85%, rgba(0,0,0,1) 100%);
+        }
+        
+        .hero-content {
+            position: relative; z-index: 2; width: 100%; max-width: 1400px;
+            margin: 0 auto; padding: 0 5% 0 5%;
+            display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem;
+        }
+        .hero-title-box {
+            flex: 1; text-align: left;
+        }
+        .hero-title-box h1 {
+            font-family: var(--font-chalk);
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 400;
+            color: var(--text-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 0.95;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        .hero-text-box {
+            max-width: 420px; text-align: left; flex-shrink: 0; margin-bottom: 0;
+        }
+        .hero-text-box p {
+            color: var(--text-white); font-size: 0.85rem; line-height: 1.6;
+            margin-bottom: 0.8rem; font-weight: 400; letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+        .hero-text-box a {
+            color: var(--text-gold); text-decoration: none; font-size: 0.75rem;
+            font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: color 0.3s ease;
+        }
+        .hero-text-box a:hover { color: var(--text-white); }
+
+        /* Form Section */
+        .message-section { padding: 6rem 5%; background-color: var(--bg-black); }
+        .section-title {
+            font-size: 2rem; font-weight: 800; color: var(--text-gold);
+            text-transform: uppercase; letter-spacing: 3px; margin-bottom: 2.5rem; text-align: center;
+        }
+        .form-grid {
+            max-width: 1100px; margin: 0 auto; display: grid;
+            grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+        }
+        .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+        .form-group input, .form-group textarea {
+            width: 100%; background: transparent; border: none;
+            border-bottom: 1px solid #333; padding: 1rem 0;
+            color: var(--text-white); font-family: var(--font-body); font-size: 0.95rem;
+            outline: none; transition: border-color 0.3s ease;
+        }
+        .form-group input:focus, .form-group textarea:focus { border-bottom-color: var(--text-gold); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .submit-btn {
+            background-color: var(--text-gold); color: #000; border: none;
+            padding: 1rem 2.5rem; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
+            align-self: flex-start; margin-top: 1rem;
+        }
+        .submit-btn:hover { background-color: var(--text-white); transform: translateY(-2px); }
+        .form-side-img img { width: 100%; height: 420px; object-fit: cover; border-radius: 6px; }
+
+        /* Location Section */
+        .location-section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; background-color: var(--bg-black); }
+        .location-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center; }
+        .location-info h3 { font-size: 1.5rem; color: var(--text-gold); margin-bottom: 1rem; text-transform: uppercase; }
+        .location-info p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .location-info strong { color: var(--text-white); }
+        .map-wrapper { width: 100%; height: 350px; background: #1a1a1a; border-radius: 6px; overflow: hidden; }
+        .map-wrapper iframe { width: 100%; height: 100%; border: 0; filter: grayscale(90%) invert(90%) contrast(120%); }
+
+        /* Support Cards */
+        .direct-support { padding: 6rem 5%; background-color: var(--bg-black); text-align: center; }
+        .support-cards { display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; flex-wrap: wrap; }
+        .support-card {
+            background-color: var(--bg-card); padding: 3rem 2rem; width: 320px; border-radius: 6px;
+            display: flex; flex-direction: column; align-items: center; gap: 1rem; transition: transform 0.3s ease;
+        }
+        .support-card:hover { transform: translateY(-5px); }
+        .support-card svg { width: 40px; height: 40px; fill: var(--text-gold); }
+        .support-card h4 { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-white); }
+        .support-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+        .support-card a { color: var(--text-gold); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+
+        /* FAQ Section */
+        .faq-section { padding: 6rem 5% 8rem 5%; max-width: 1000px; margin: 0 auto; background-color: var(--bg-black); }
+        .faq-item { border-bottom: 1px solid #222; padding: 1.5rem 0; cursor: pointer; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: 600; color: var(--text-white); }
+        .faq-question span { color: var(--text-gold); font-size: 1.5rem; transition: transform 0.3s ease; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; padding-top: 0; }
+        .faq-item.active .faq-answer { max-height: 200px; padding-top: 1rem; }
+        .faq-item.active .faq-question span { transform: rotate(45deg); }
+
+        /* Footer */
+        footer { background-color: #050505; padding: 3rem 5%; border-top: 1px solid #111; }
+        .footer-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 1.5rem; }
+        .footer-center { display: flex; align-items: center; gap: 1.5rem; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1px; }
+        .footer-center .divider { color: var(--text-gold); }
+        .footer-center span { display: flex; align-items: center; gap: 0.5rem; }
+        .footer-center svg { width: 14px; height: 14px; fill: var(--text-gold); }
+        .footer-socials { display: flex; gap: 1.2rem; }
+        .footer-socials a { color: var(--text-muted); transition: color 0.3s ease; display: flex; align-items: center; }
+        .footer-socials a:hover { color: var(--text-gold); }
+        .footer-socials svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            #navbar, #navbar.scrolled { padding: 1rem 1.5rem; background: rgba(0,0,0,0.9); }
+            .mobile-menu-btn { display: block; }
+            .nav-links-center {
+                position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px);
+                background-color: var(--bg-black); flex-direction: column; justify-content: center;
+                gap: 2.5rem; transition: left 0.3s ease;
+            }
+            .nav-links-center.open { left: 0; }
+            .hero-content { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding-bottom: 1.5rem; }
+            .form-grid, .location-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .form-side-img img { height: 300px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section { height: 60vh; min-height: 400px; }
+            .section-title { font-size: 1.6rem; }
+            .support-cards { flex-direction: column; align-items: center; }
+            .support-card { width: 100%; max-width: 350px; }
+            .footer-container { flex-direction: column; text-align: center; }
+            .footer-center { flex-direction: column; gap: 0.5rem; }
+            .footer-center .divider { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+   <!-- Navbar -->
+<nav id="navbar">
+    <a href="index.html" class="brand-logo-badge">
+        <span class="valgus-text">VALGUS</span>
+        <span class="craft-text">CRAFT KITCHEN</span>
+    </a>
+    
+    <ul class="nav-links-center" id="navLinks">
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+
+    <div class="nav-right-group">
+        <a href="booking.html" class="booking-link">Booking</a>
+        <button class="mobile-menu-btn" id="menuBtn" aria-label="Toggle Navigation">&#9776;</button>
+    </div>
+</nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1600&auto=format&fit=crop" alt="Valgus Craft Kitchen Bar Atmosphere">
+        </div>
+        <div class="hero-content">
+            <div class="hero-title-box">
+                <h1>GET IN<br>TOUCH</h1>
+            </div>
+            <div class="hero-text-box">
+                <p>Have Questions Or Need Assistance? We're Here To Help! Reach Out To Our Team, And We'll Respond As Soon As Possible.</p>
+                <a href="tel:+254700123456">CUSTOMER SUPPORT HOTLINE &#8599;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Send Us A Message Form -->
+    <section class="message-section">
+        <h2 class="section-title">SEND US A MESSAGE</h2>
+        <div class="form-grid">
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for reaching out! We will contact you shortly.');">
+                <div class="form-group">
+                    <input type="text" placeholder="YOUR NAME" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="YOUR EMAIL ADDRESS" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="PHONE NUMBER">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="YOUR MESSAGE..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">SEND MESSAGE</button>
+            </form>
+            <div class="form-side-img">
+                <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=800&auto=format&fit=crop" alt="Valgus Atmosphere">
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Location and Map -->
+    <section class="location-section">
+        <div class="location-grid">
+            <div class="location-info">
+                <h3>VISIT OUR CRAFT KITCHEN</h3>
+                <p><strong>LOCATION:</strong><br>Woodvale Groove, Westlands<br>Nairobi, Kenya</p>
+                <p><strong>OPENING HOURS:</strong><br>Monday - Sunday: Noon to Midnight<br>Kitchen Closes at 11:00 PM</p>
+                <p><strong>RESERVATIONS:</strong><br>Walk-ins welcome. For parties larger than 8, please call ahead or use our online booking system.</p>
+            </div>
+            <div class="map-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.364654877382!2d36.8018285!3d-1.2647714!2m3!1f0!0f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f173c0a1f1111%3A0x863e46c75c87e1f!2sWestlands%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Direct Support Cards -->
+    <section class="direct-support">
+        <h2 class="section-title">CALL OR EMAIL US DIRECTLY</h2>
+        <div class="support-cards">
+            <div class="support-card">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <h4>PHONE SUPPORT</h4>
+                <p>Speak directly with our front desk staff for immediate assistance or party bookings.</p>
+                <a href="tel:+254700123456">+254 700 123 456</a>
+            </div>
+            <div class="support-card">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <h4>EMAIL SUPPORT</h4>
+                <p>Drop us a mail for corporate events, catering inquiries, or general feedback.</p>
+                <a href="mailto:info@valguscraftkitchen.co.ke">info@valguscraftkitchen.co.ke</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: FAQ -->
+    <section class="faq-section">
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">FREQUENTLY ASKED QUESTIONS</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">Do you take reservations for large groups? <span>+</span></div>
+            <div class="faq-answer">Yes, we accommodate group reservations! For parties larger than 8 guests, please reach out to us via our phone line or contact form at least 24 hours in advance.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Are there vegetarian and vegan options available? <span>+</span></div>
+            <div class="faq-answer">Absolutely. We offer craft vegetarian burgers, fresh salads, and custom pasta dishes tailored to dietary preferences.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Is parking available on site? <span>+</span></div>
+            <div class="faq-answer">Yes, we offer secure baseline parking with dedicated security attendants for all our guests in Westlands.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Do you host private events or corporate parties? <span>+</span></div>
+            <div class="faq-answer">Yes! Our venue is available for full or partial buyouts for private birthdays, corporate mixers, and special occasions.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <a href="index_3.html" class="brand-logo-badge">
+                <span class="valgus-text">VALGUS</span>
+                <span class="craft-text">CRAFT KITCHEN</span>
+            </a>
+            <div class="footer-center">
+                <span>Copyright 2024© Valgus Craft Kitchen</span>
+                <span class="divider">|</span>
+                <span>
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    Westlands, Nairobi
+                </span>
+                <span class="divider">|</span>
+                <span>
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    +254 700 123 456
+                </span>
+            </div>
+            <div class="footer-socials">
+                <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+                <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Hamburger Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // FAQ Accordion Functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
